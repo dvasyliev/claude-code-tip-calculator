@@ -1,0 +1,29 @@
+.split-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.split-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.split-chevron {
+  font-size: 16px;
+  color: #3b82f6;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.split-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}

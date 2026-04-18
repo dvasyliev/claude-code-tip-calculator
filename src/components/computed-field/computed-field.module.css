@@ -1,0 +1,10 @@
+.field-row--computed {
+  background: #f9fafb;
+}
+
+.computed {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 500;
+  color: #3b82f6;
+}
