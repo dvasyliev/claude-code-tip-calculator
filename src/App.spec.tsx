@@ -309,6 +309,28 @@ describe('App – Reset button', () => {
   })
 })
 
+describe('App – accessibility', () => {
+  it('bill input has accessible label', () => {
+    setup()
+    expect(screen.getByLabelText('Bill')).toBeInTheDocument()
+  })
+
+  it('tip input has accessible label', () => {
+    setup()
+    expect(screen.getByLabelText('Tip')).toBeInTheDocument()
+  })
+
+  it('reset button is accessible by role and name', () => {
+    setup()
+    expect(screen.getByRole('button', { name: /reset/i })).toBeEnabled()
+  })
+
+  it('split toggle button is accessible by role', () => {
+    setup()
+    expect(screen.getByRole('button', { name: /are you splitting the bill/i })).toBeInTheDocument()
+  })
+})
+
 describe('App – invalid value handling', () => {
   it('cleared bill normalizes to 0.00 and computed shows 0.00', async () => {
     const { user } = setup()

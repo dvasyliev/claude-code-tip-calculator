@@ -7,6 +7,7 @@ import {
   isValidTipInput, normalizeTip,
   isValidPeopleInput, normalizePeople,
 } from './utils/validation'
+import { useTipCalculator } from './hooks/useTipCalculator'
 import { FieldInput } from './components/field-input/field-input'
 import { ComputedField } from './components/computed-field/computed-field'
 import { SplitSection } from './components/split-section/split-section'
@@ -17,13 +18,7 @@ function App() {
   const [people, setPeople] = useState<string>(DEFAULTS.people)
   const [splitOpen, setSplitOpen] = useState(false)
 
-  const billNum = parseFloat(bill) || 0
-  const tipNum = parseFloat(tip) || 0
-  const peopleNum = Math.max(1, parseInt(people) || 1)
-  const tipAmount = billNum * tipNum / 100
-  const total = billNum + tipAmount
-  const tipPerPerson = tipAmount / peopleNum
-  const totalPerPerson = total / peopleNum
+  const { tipAmount, total, tipPerPerson, totalPerPerson } = useTipCalculator(bill, tip, people)
 
   const handleReset = () => {
     setBill(DEFAULTS.bill)
@@ -63,7 +58,7 @@ function App() {
 
         <div className={styles.divider} />
 
-        <SplitSection open={splitOpen} onToggle={() => setSplitOpen(o => !o)}>
+        <SplitSection label="Are you splitting the bill?" open={splitOpen} onToggle={() => setSplitOpen(o => !o)}>
           <FieldInput
             label="Number of people"
             value={people}

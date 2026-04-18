@@ -12,9 +12,11 @@ export function FieldInput({
   min,
   max,
 }: FieldInputProps) {
+  const id = label.toLowerCase().replace(/\s+/g, '-')
   return (
-    <Field label={label}>
+    <Field label={label} htmlFor={id}>
       <input
+        id={id}
         className={styles['field-input']}
         type={type}
         inputMode={inputMode}
