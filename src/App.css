@@ -122,3 +122,68 @@
   font-size: 16px;
   line-height: 1;
 }
+
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0 -4px;
+}
+
+.split-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.split-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.split-chevron {
+  font-size: 16px;
+  color: #3b82f6;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.split-row {
+  display: flex;
+  gap: 12px;
+}
+
+.split-row .section {
+  flex: 1;
+  min-width: 0;
+}
+
+.split-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 14px;
+  background: #f3f4f6;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+
+.reset-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
