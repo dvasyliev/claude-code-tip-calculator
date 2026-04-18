@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 
-const DEFAULTS = { bill: '321', tip: '10', people: '2' }
+const DEFAULTS = { bill: '0.00', tip: '0', people: '2' }
 
 function App() {
   const [bill, setBill] = useState<string>(DEFAULTS.bill)
   const [tip, setTip] = useState<string>(DEFAULTS.tip)
   const [people, setPeople] = useState<string>(DEFAULTS.people)
-  const [splitOpen, setSplitOpen] = useState<boolean>(true)
+  const [splitOpen, setSplitOpen] = useState<boolean>(false)
 
   const billNum = parseFloat(bill) || 0
   const tipNum = parseFloat(tip) || 0
@@ -18,17 +18,48 @@ function App() {
   const totalPerPerson = total / peopleNum
 
   const fmt = (n: number) =>
-    n.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+  const handleBillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value
+    if (/^\d*\.?\d{0,2}$/.test(v) && (parseFloat(v) || 0) <= 100000) setBill(v)
+  }
+
+  const handleBillBlur = () => {
+    const n = Math.min(Math.max(parseFloat(bill) || 0, 0), 100000)
+    setBill(n.toFixed(2))
+  }
+
+  const handleTipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value
+    if (/^\d*$/.test(v) && (parseInt(v) || 0) <= 100) setTip(v)
+  }
+
+  const handleTipBlur = () => {
+    const n = Math.min(Math.max(parseInt(tip) || 0, 0), 100)
+    setTip(String(n))
+  }
+
+  const handlePeopleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value
+    if (/^\d*$/.test(v) && (parseInt(v) || 0) <= 50) setPeople(v)
+  }
+
+  const handlePeopleBlur = () => {
+    const n = Math.min(Math.max(parseInt(people) || 2, 2), 50)
+    setPeople(String(n))
+  }
 
   const handleReset = () => {
     setBill(DEFAULTS.bill)
     setTip(DEFAULTS.tip)
     setPeople(DEFAULTS.people)
-    setSplitOpen(true)
+    setSplitOpen(false)
   }
 
   return (
     <div className="page">
+      <h1 className="page-title">Tip Calculator</h1>
       <div className="card">
         <div className="split-row">
           <div className="section">
@@ -38,9 +69,11 @@ function App() {
             <div className="field-row">
               <input
                 className="field-input"
-                type="number"
+                type="text"
+                inputMode="decimal"
                 value={bill}
-                onChange={e => setBill(e.target.value)}
+                onChange={handleBillChange}
+                onBlur={handleBillBlur}
               />
             </div>
           </div>
@@ -53,8 +86,11 @@ function App() {
               <input
                 className="field-input"
                 type="number"
+                min="0"
+                max="100"
                 value={tip}
-                onChange={e => setTip(e.target.value)}
+                onChange={handleTipChange}
+                onBlur={handleTipBlur}
               />
             </div>
           </div>
@@ -98,9 +134,11 @@ function App() {
                   <input
                     className="field-input"
                     type="number"
-                    min="1"
+                    min="2"
+                    max="50"
                     value={people}
-                    onChange={e => setPeople(e.target.value)}
+                    onChange={handlePeopleChange}
+                    onBlur={handlePeopleBlur}
                   />
                 </div>
               </div>

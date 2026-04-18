@@ -1,8 +1,10 @@
 .page {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
   background: #eef0f7;
   padding: 24px;
   box-sizing: border-box;
@@ -18,6 +20,15 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.3px;
 }
 
 .section {
