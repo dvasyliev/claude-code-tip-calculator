@@ -1,23 +1,23 @@
 import { describe, it, expect } from 'vitest'
 import {
-  billSchema, normalizeBill,
-  tipSchema, normalizeTip,
-  peopleSchema, normalizePeople,
+  isValidBillInput, normalizeBill,
+  isValidTipInput, normalizeTip,
+  isValidPeopleInput, normalizePeople,
 } from './validation'
 
-describe('billSchema', () => {
-  it('accepts empty string', () => expect(billSchema.safeParse('').success).toBe(true))
-  it('accepts integers', () => expect(billSchema.safeParse('100').success).toBe(true))
-  it('accepts partial decimal "."', () => expect(billSchema.safeParse('.').success).toBe(true))
-  it('accepts partial decimal "1."', () => expect(billSchema.safeParse('1.').success).toBe(true))
-  it('accepts 1 decimal place', () => expect(billSchema.safeParse('1.5').success).toBe(true))
-  it('accepts 2 decimal places', () => expect(billSchema.safeParse('1.50').success).toBe(true))
-  it('accepts max value 100000', () => expect(billSchema.safeParse('100000').success).toBe(true))
-  it('rejects 3 decimal places', () => expect(billSchema.safeParse('1.555').success).toBe(false))
-  it('rejects above 100000', () => expect(billSchema.safeParse('100001').success).toBe(false))
-  it('rejects letters', () => expect(billSchema.safeParse('abc').success).toBe(false))
-  it('rejects negative sign', () => expect(billSchema.safeParse('-1').success).toBe(false))
-  it('rejects multiple dots', () => expect(billSchema.safeParse('1.2.3').success).toBe(false))
+describe('isValidBillInput', () => {
+  it('accepts empty string', () => expect(isValidBillInput('')).toBe(true))
+  it('accepts integers', () => expect(isValidBillInput('100')).toBe(true))
+  it('accepts partial decimal "."', () => expect(isValidBillInput('.')).toBe(true))
+  it('accepts partial decimal "1."', () => expect(isValidBillInput('1.')).toBe(true))
+  it('accepts 1 decimal place', () => expect(isValidBillInput('1.5')).toBe(true))
+  it('accepts 2 decimal places', () => expect(isValidBillInput('1.50')).toBe(true))
+  it('accepts max value 100000', () => expect(isValidBillInput('100000')).toBe(true))
+  it('rejects 3 decimal places', () => expect(isValidBillInput('1.555')).toBe(false))
+  it('rejects above 100000', () => expect(isValidBillInput('100001')).toBe(false))
+  it('rejects letters', () => expect(isValidBillInput('abc')).toBe(false))
+  it('rejects negative sign', () => expect(isValidBillInput('-1')).toBe(false))
+  it('rejects multiple dots', () => expect(isValidBillInput('1.2.3')).toBe(false))
 })
 
 describe('normalizeBill', () => {
@@ -30,14 +30,14 @@ describe('normalizeBill', () => {
   it('preserves max value', () => expect(normalizeBill('100000')).toBe('100000.00'))
 })
 
-describe('tipSchema', () => {
-  it('accepts empty string', () => expect(tipSchema.safeParse('').success).toBe(true))
-  it('accepts zero', () => expect(tipSchema.safeParse('0').success).toBe(true))
-  it('accepts 100', () => expect(tipSchema.safeParse('100').success).toBe(true))
-  it('accepts mid-range', () => expect(tipSchema.safeParse('15').success).toBe(true))
-  it('rejects above 100', () => expect(tipSchema.safeParse('101').success).toBe(false))
-  it('rejects decimals', () => expect(tipSchema.safeParse('1.5').success).toBe(false))
-  it('rejects letters', () => expect(tipSchema.safeParse('abc').success).toBe(false))
+describe('isValidTipInput', () => {
+  it('accepts empty string', () => expect(isValidTipInput('')).toBe(true))
+  it('accepts zero', () => expect(isValidTipInput('0')).toBe(true))
+  it('accepts 100', () => expect(isValidTipInput('100')).toBe(true))
+  it('accepts mid-range', () => expect(isValidTipInput('15')).toBe(true))
+  it('rejects above 100', () => expect(isValidTipInput('101')).toBe(false))
+  it('rejects decimals', () => expect(isValidTipInput('1.5')).toBe(false))
+  it('rejects letters', () => expect(isValidTipInput('abc')).toBe(false))
 })
 
 describe('normalizeTip', () => {
@@ -48,13 +48,13 @@ describe('normalizeTip', () => {
   it('clamps negative to 0', () => expect(normalizeTip('-5')).toBe('0'))
 })
 
-describe('peopleSchema', () => {
-  it('accepts empty string', () => expect(peopleSchema.safeParse('').success).toBe(true))
-  it('accepts valid count', () => expect(peopleSchema.safeParse('2').success).toBe(true))
-  it('accepts max 50', () => expect(peopleSchema.safeParse('50').success).toBe(true))
-  it('rejects above 50', () => expect(peopleSchema.safeParse('51').success).toBe(false))
-  it('rejects decimals', () => expect(peopleSchema.safeParse('1.5').success).toBe(false))
-  it('rejects letters', () => expect(peopleSchema.safeParse('abc').success).toBe(false))
+describe('isValidPeopleInput', () => {
+  it('accepts empty string', () => expect(isValidPeopleInput('')).toBe(true))
+  it('accepts valid count', () => expect(isValidPeopleInput('2')).toBe(true))
+  it('accepts max 50', () => expect(isValidPeopleInput('50')).toBe(true))
+  it('rejects above 50', () => expect(isValidPeopleInput('51')).toBe(false))
+  it('rejects decimals', () => expect(isValidPeopleInput('1.5')).toBe(false))
+  it('rejects letters', () => expect(isValidPeopleInput('abc')).toBe(false))
 })
 
 describe('normalizePeople', () => {

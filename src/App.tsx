@@ -1,41 +1,29 @@
 import { useState } from 'react'
-import { Controller, useForm, useWatch } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import type { ZodType } from 'zod'
 import styles from './app.module.css'
 import { DEFAULTS } from './types/tip-state'
 import { formatCurrency } from './utils/format'
 import {
-  tipFormSchema, type TipFormValues,
-  billSchema, normalizeBill,
-  tipSchema, normalizeTip,
-  peopleSchema, normalizePeople,
+  isValidBillInput, normalizeBill,
+  isValidTipInput, normalizeTip,
+  isValidPeopleInput, normalizePeople,
 } from './utils/validation'
 import { useTipCalculator } from './hooks/useTipCalculator'
 import { FieldInput } from './components/field-input/field-input'
 import { ComputedField } from './components/computed-field/computed-field'
 import { SplitSection } from './components/split-section/split-section'
 
-// Only forwards keystrokes that leave the field valid, so invalid characters never appear.
-function acceptIfValid(schema: ZodType, onChange: (v: string) => void) {
-  return (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (schema.safeParse(e.target.value).success) onChange(e.target.value)
-  }
-}
-
 function App() {
-  const { control, reset } = useForm<TipFormValues>({
-    defaultValues: DEFAULTS,
-    resolver: zodResolver(tipFormSchema),
-    mode: 'onChange',
-  })
-  const { bill, tip, people } = useWatch({ control })
+  const [bill, setBill] = useState<string>(DEFAULTS.bill)
+  const [tip, setTip] = useState<string>(DEFAULTS.tip)
+  const [people, setPeople] = useState<string>(DEFAULTS.people)
   const [splitOpen, setSplitOpen] = useState(false)
 
-  const { tipAmount, total, tipPerPerson, totalPerPerson } = useTipCalculator(bill ?? '', tip ?? '', people ?? '')
+  const { tipAmount, total, tipPerPerson, totalPerPerson } = useTipCalculator(bill, tip, people)
 
   const handleReset = () => {
-    reset(DEFAULTS)
+    setBill(DEFAULTS.bill)
+    setTip(DEFAULTS.tip)
+    setPeople(DEFAULTS.people)
     setSplitOpen(false)
   }
 
@@ -44,34 +32,22 @@ function App() {
       <h1 className={styles['page-title']}>Tip Calculator</h1>
       <div className={styles.card}>
         <div className={styles['split-row']}>
-          <Controller
-            name="bill"
-            control={control}
-            render={({ field }) => (
-              <FieldInput
-                label="Bill"
-                value={field.value}
-                type="text"
-                inputMode="decimal"
-                onChange={acceptIfValid(billSchema, field.onChange)}
-                onBlur={() => { field.onChange(normalizeBill(field.value)); field.onBlur() }}
-              />
-            )}
+          <FieldInput
+            label="Bill"
+            value={bill}
+            type="text"
+            inputMode="decimal"
+            onChange={e => { if (isValidBillInput(e.target.value)) setBill(e.target.value) }}
+            onBlur={() => setBill(normalizeBill(bill))}
           />
-          <Controller
-            name="tip"
-            control={control}
-            render={({ field }) => (
-              <FieldInput
-                label="Tip"
-                value={field.value}
-                type="number"
-                min="0"
-                max="100"
-                onChange={acceptIfValid(tipSchema, field.onChange)}
-                onBlur={() => { field.onChange(normalizeTip(field.value)); field.onBlur() }}
-              />
-            )}
+          <FieldInput
+            label="Tip"
+            value={tip}
+            type="number"
+            min="0"
+            max="100"
+            onChange={e => { if (isValidTipInput(e.target.value)) setTip(e.target.value) }}
+            onBlur={() => setTip(normalizeTip(tip))}
           />
         </div>
 
@@ -83,20 +59,14 @@ function App() {
         <div className={styles.divider} />
 
         <SplitSection label="Are you splitting the bill?" open={splitOpen} onToggle={() => setSplitOpen(o => !o)}>
-          <Controller
-            name="people"
-            control={control}
-            render={({ field }) => (
-              <FieldInput
-                label="Number of people"
-                value={field.value}
-                type="number"
-                min="2"
-                max="50"
-                onChange={acceptIfValid(peopleSchema, field.onChange)}
-                onBlur={() => { field.onChange(normalizePeople(field.value)); field.onBlur() }}
-              />
-            )}
+          <FieldInput
+            label="Number of people"
+            value={people}
+            type="number"
+            min="2"
+            max="50"
+            onChange={e => { if (isValidPeopleInput(e.target.value)) setPeople(e.target.value) }}
+            onBlur={() => setPeople(normalizePeople(people))}
           />
           <div className={styles['split-row']}>
             <ComputedField label="Tip per person" value={formatCurrency(tipPerPerson)} />
