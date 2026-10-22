@@ -8,7 +8,7 @@ A React-based tip calculator that computes tip amounts, totals, and per-person s
 
 - Calculate tip amount and total based on bill and tip percentage
 - Split the bill across 2–50 people
-- Real-time input validation with automatic clamping on blur
+- Real-time input validation (React Hook Form + Zod schemas) with automatic clamping on blur
 - Collapsible bill-split section
 - Locale-aware currency formatting with thousands separators
 - Reset all values to defaults
@@ -29,7 +29,7 @@ A React-based tip calculator that computes tip amounts, totals, and per-person s
 src/
 ├── App.tsx           # Main component — state, calculations, layout
 ├── types/            # TipState interface and default values
-├── utils/            # Input validation and currency formatting
+├── utils/            # Zod form schemas, blur normalization, and currency formatting
 └── components/       # Field, FieldInput, ComputedField, SplitSection
 ```
 
