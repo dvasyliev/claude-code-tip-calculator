@@ -1,4 +1,18 @@
 {
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(npm run lint*)",
+      "Bash(npm run test*)",
+      "Bash(npm run build*)"
+    ],
+    "ask": ["Bash(git commit*)", "Bash(git push*)"],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./dist/**)"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {
