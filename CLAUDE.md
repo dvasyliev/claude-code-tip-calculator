@@ -21,3 +21,9 @@ npx vitest run -t "test name substring"
 ```
 
 Vitest runs in jsdom with `globals: true`; `src/vitest.setup.ts` registers `@testing-library/jest-dom` matchers. Tests are colocated as `*.spec.ts(x)` next to their source.
+
+## Rules in `.claude/rules/`
+
+- `structure.md`: where new and moved files go.
+- `performance.md`: how pages load fast (streaming, lists in batches, few data requests, caching, media) and how to measure it (loads when working in `app/` or `lib/`). Measure every change to a page.
+- `tests.md`: unit and end-to-end test conventions (loads when working on test files).
