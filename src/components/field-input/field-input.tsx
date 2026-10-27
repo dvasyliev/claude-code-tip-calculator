@@ -1,23 +1,23 @@
-import { Field } from '../field/field'
-import styles from './field-input.module.css'
-import type { FieldInputProps } from './field-input.types'
+import { Field } from "../field/field";
+import styles from "./field-input.module.css";
+import type { FieldInputProps } from "./field-input.types";
 
 export function FieldInput({
   label,
   value,
   onChange,
   onBlur,
-  type = 'text',
+  type = "text",
   inputMode,
   min,
   max,
 }: FieldInputProps) {
-  const id = label.toLowerCase().replace(/\s+/g, '-')
+  const id = label.toLowerCase().replace(/\s+/g, "-");
   return (
     <Field label={label} htmlFor={id}>
       <input
         id={id}
-        className={styles['field-input']}
+        className={styles["field-input"]}
         type={type}
         inputMode={inputMode}
         min={min}
@@ -27,5 +27,5 @@ export function FieldInput({
         onBlur={onBlur}
       />
     </Field>
-  )
+  );
 }
