@@ -3,7 +3,7 @@
     "target": "es2023",
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "esnext",
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom"],
     "skipLibCheck": true,
     "allowJs": true,
     "esModuleInterop": true,
@@ -35,7 +35,8 @@
     "src",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "vitest.config.mts"
+    "vitest.config.mts",
+    "playwright.config.ts"
   ],
   "exclude": ["node_modules"]
 }

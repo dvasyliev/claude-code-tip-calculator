@@ -15,6 +15,8 @@ npm start          # serve the production build at http://localhost:5173
 npm run lint       # eslint .
 npm test           # vitest in watch mode
 npm run test:run   # vitest once
+npm run verify     # end-to-end tests (Playwright)
+npx playwright test tests/x/y.spec.ts
 
 # Single file / single test
 npx vitest run src/utils/validation.spec.ts

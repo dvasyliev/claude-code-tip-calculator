@@ -20,6 +20,28 @@ Use `superpowers:writing-plans`. List each scenario's user steps with the expect
 
 Use `superpowers:test-driven-development`: write the tests, watch them fail with `npm test`, then implement.
 
+## 4. Browser check
+
+With the `playwright-cli` skill, drive the feature on the running dev server and confirm the `- expect:` outcomes.
+
+Then measure each page the feature touches as `performance.md` says (time cold and warm, HTML size, cards sent), and give the before and after numbers in the final message.
+
+### Screenshots
+
+Every screenshot stays in the conversation and is re-read on every later turn, so take few and small ones.
+
+- Check behaviour with `playwright-cli snapshot` (text), not screenshots. Search it instead of reading it whole when you look for one thing.
+- Take a screenshot only to judge how something looks: layout, colours, spacing.
+- Screenshot the element in question (`playwright-cli screenshot e5`), not the whole page. Never use `--hires`.
+- Fix the window size before screenshots: `playwright-cli resize 1280 800` for desktop, `playwright-cli open --mobile` for phone.
+- One screenshot per state you need to judge. Do not re-take one to confirm a change a snapshot already shows.
+
+## 5. End-to-end tests
+
+Write them for the feature's happy paths only, one per main scenario.
+
+While working, run only the feature's own spec files (`npx playwright test tests/x/y.spec.ts`). Run the whole suite with `npm run verify` once, before the commit.
+
 ## Subagents
 
 Subagents that implement a task run only the unit tests of the files they touch (`npx vitest run <files>`). They do not run `npm run check`; the Stop hook covers that.

@@ -26,3 +26,5 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
