@@ -42,6 +42,10 @@ Write them for the feature's happy paths only, one per main scenario.
 
 While working, run only the feature's own spec files (`npx playwright test tests/x/y.spec.ts`). Run the whole suite with `npm run verify` once, before the commit.
 
+## 6. Review
+
+Run `/superpowers:requesting-code-review ` on the diff and apply what it finds.
+
 ## Subagents
 
 Subagents that implement a task run only the unit tests of the files they touch (`npx vitest run <files>`). They do not run `npm run check`; the Stop hook covers that.
