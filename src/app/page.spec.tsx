@@ -94,7 +94,7 @@ describe("App – Bill input", () => {
     const bill = getBillInput();
     await user.clear(bill);
     await user.type(bill, "100001");
-    expect(bill).not.toHaveValue("100001");
+    expect(bill).toHaveValue("10000");
   });
 
   it("normalizes on blur", async () => {
@@ -121,7 +121,7 @@ describe("App – Tip input", () => {
     const tip = getTipInput();
     await user.clear(tip);
     await user.type(tip, "101");
-    expect(tip).not.toHaveValue(101);
+    expect(tip).toHaveValue(10);
   });
 
   it('normalizes empty tip to "0" on blur', async () => {
@@ -246,6 +246,18 @@ describe("App – Number of people", () => {
     await user.tab();
     expect(people).toHaveValue(2);
   });
+
+  it("keeps its value when the split section is closed and reopened", async () => {
+    const { user } = setup();
+    await openSplit(user);
+    const people = getPeopleInput();
+    await user.clear(people);
+    await user.type(people, "5");
+    await user.tab();
+    await openSplit(user);
+    await openSplit(user);
+    expect(getPeopleInput()).toHaveValue(5);
+  });
 });
 
 describe("App – per-person calculations", () => {
@@ -367,5 +379,14 @@ describe("App – invalid value handling", () => {
 
     expect(tip).toHaveValue(0);
     expect(getComputedValue("Tip amount").textContent).toBe("0.00");
+  });
+
+  it("Enter in bill cannot submit and keeps the typed value", async () => {
+    const { user } = setup();
+    const bill = getBillInput();
+    await user.clear(bill);
+    await user.type(bill, "50{Enter}");
+    expect(bill.closest("form")).toBeNull();
+    expect(bill).toHaveValue("50");
   });
 });

@@ -33,6 +33,7 @@
   "include": [
     "next-env.d.ts",
     "src",
+    "tests",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "vitest.config.mts",
