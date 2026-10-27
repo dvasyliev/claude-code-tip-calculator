@@ -45,6 +45,18 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-all.sh",
+            "timeout": 600,
+            "statusMessage": "Running checks"
+          }
+        ]
+      }
     ]
   }
 }
