@@ -1,13 +1,13 @@
 {
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(npm run lint*)",
       "Bash(npm run test*)",
       "Bash(npm run build*)"
     ],
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(./dist/**)"],
     "ask": ["Bash(git commit*)", "Bash(git push*)"],
-    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(./dist/**)"]
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "SessionStart": [
@@ -58,5 +58,8 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
   }
 }

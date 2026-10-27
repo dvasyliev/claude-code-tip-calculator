@@ -28,3 +28,8 @@ The page lives in `src/app/page.tsx` (client component) with `src/app/layout.tsx
 - `structure.md`: where new and moved files go.
 - `performance.md`: how pages load fast (streaming, lists in batches, few data requests, caching, media) and how to measure it (loads when working in `app/` or `lib/`). Measure every change to a page.
 - `tests.md`: unit and end-to-end test conventions (loads when working on test files).
+- `feature-workflow.md`: the steps for building a user-facing feature.
+
+## Documentation
+
+- **`docs/`** holds the spec for each feature (`01`–`14`) and `00-architecture.md` with the shared plan (implementation order and older plans written before the switch to TMDB lists). Read the matching doc before building a feature; it is the spec step 1 of `feature-workflow.md` starts from.
