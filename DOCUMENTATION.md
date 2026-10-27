@@ -19,7 +19,7 @@ A React-based tip calculator that computes tip amounts, totals, and per-person s
 |---|---|
 | UI | React 19 |
 | Language | TypeScript 6 |
-| Build / Dev Server | Vite 8 |
+| Framework | Next.js 16 (App Router) |
 | Testing | Vitest 4, React Testing Library, jsdom |
 | Linting | ESLint 9 |
 
@@ -27,7 +27,7 @@ A React-based tip calculator that computes tip amounts, totals, and per-person s
 
 ```
 src/
-├── App.tsx           # Main component — state, calculations, layout
+├── app/              # layout.tsx (root layout), page.tsx (main component — state, calculations, layout)
 ├── types/            # TipState interface and default values
 ├── utils/            # Input validation and currency formatting
 └── components/       # Field, FieldInput, ComputedField, SplitSection
@@ -52,9 +52,9 @@ npm run dev
 
 | Script | Command | Description |
 |---|---|---|
-| `npm run dev` | `vite` | Start development server with HMR |
-| `npm run build` | `tsc -b && vite build` | Type-check and build for production |
-| `npm run preview` | `vite preview` | Serve the production build locally |
+| `npm run dev` | `next dev -p 5173` | Start development server with HMR |
+| `npm run build` | `next build` | Type-check and build for production |
+| `npm start` | `next start -p 5173` | Serve the production build locally |
 | `npm run lint` | `eslint .` | Run ESLint across all files |
 | `npm test` | `vitest` | Run tests in watch mode |
 | `npm run test:run` | `vitest run` | Run tests once and exit |

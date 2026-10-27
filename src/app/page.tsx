@@ -1,16 +1,18 @@
+'use client'
+
 import { useState } from 'react'
-import styles from './app.module.css'
-import { DEFAULTS } from './types/tip-state'
-import { formatCurrency } from './utils/format'
+import styles from './page.module.css'
+import { DEFAULTS } from '@/types/tip-state'
+import { formatCurrency } from '@/utils/format'
 import {
   isValidBillInput, normalizeBill,
   isValidTipInput, normalizeTip,
   isValidPeopleInput, normalizePeople,
-} from './utils/validation'
-import { useTipCalculator } from './hooks/useTipCalculator'
-import { FieldInput } from './components/field-input/field-input'
-import { ComputedField } from './components/computed-field/computed-field'
-import { SplitSection } from './components/split-section/split-section'
+} from '@/utils/validation'
+import { useTipCalculator } from '@/hooks/useTipCalculator'
+import { FieldInput } from '@/components/field-input/field-input'
+import { ComputedField } from '@/components/computed-field/computed-field'
+import { SplitSection } from '@/components/split-section/split-section'
 
 function App() {
   const [bill, setBill] = useState<string>(DEFAULTS.bill)

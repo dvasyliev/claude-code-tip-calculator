@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import App from './App'
+import App from './page'
 
 function setup() {
   const user = userEvent.setup()
