@@ -7,11 +7,7 @@
       "Bash(npm run build*)"
     ],
     "ask": ["Bash(git commit*)", "Bash(git push*)"],
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(./dist/**)"
-    ]
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Read(./dist/**)"]
   },
   "hooks": {
     "SessionStart": [
@@ -33,6 +29,19 @@
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guard-commands.sh",
             "statusMessage": "Checking command"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format-lint-file.sh",
+            "timeout": 60,
+            "statusMessage": "Formatting and linting"
           }
         ]
       }

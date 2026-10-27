@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "next dev -p 5173",
     "build": "next build",
-    "lint": "eslint .",
+    "typecheck": "tsc -b",
+    "lint": "eslint --max-warnings 0",
+    "lint:file": "eslint --max-warnings 0",
+    "format": "prettier --write .",
+    "format:file": "prettier --write",
     "test": "vitest",
     "test:run": "vitest run",
     "start": "next start -p 5173"
@@ -25,10 +29,14 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.1.4",
-    "eslint": "^9.39.4",
+    "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-boundaries": "^7.3.0",
     "jsdom": "^29.0.2",
+    "prettier": "^3.9.10",
     "typescript": "~6.0.2",
+    "typescript-eslint": "^8.72.1",
     "vitest": "^4.1.4"
   }
 }
