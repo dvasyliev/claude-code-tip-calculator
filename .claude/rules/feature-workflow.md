@@ -46,6 +46,10 @@ While working, run only the feature's own spec files (`npx playwright test tests
 
 Run `/superpowers:requesting-code-review ` on the diff and apply what it finds.
 
+## 7. Improve the harness
+
+Invoke the `improve-harness` skill.
+
 ## Subagents
 
 Subagents that implement a task run only the unit tests of the files they touch (`npx vitest run <files>`). They do not run `npm run check`; the Stop hook covers that.
