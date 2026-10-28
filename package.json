@@ -17,8 +17,9 @@
     "start": "next start -p 5173",
     "test:run": "vitest run",
     "test": "vitest run --passWithNoTests",
+    "test:e2e": "playwright test",
     "typecheck": "tsc -b",
-    "verify": "playwright test",
+    "verify": "npm run -s check && npm run -s test:e2e",
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {

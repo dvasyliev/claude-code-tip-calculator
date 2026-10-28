@@ -95,7 +95,7 @@
 
 - [ ] **Step 1:** Start from `tests/seed.spec.ts` and write one test per file from the Task 2 Step 5 `expect:` lines, using `getByLabel` and `getByRole` only.
 - [ ] **Step 2: Run** `npx playwright test tests/tip-calculator`. Expected: 3 passed.
-- [ ] **Step 3: Run** `npm run verify` and `npm run check`. Expected: everything is green.
+- [ ] **Step 3: Run** `npm run test:e2e` and `npm run check`. Expected: everything is green.
 - [ ] **Step 4: Commit**
 
 ```bash

@@ -40,7 +40,7 @@ Every screenshot stays in the conversation and is re-read on every later turn, s
 
 Write them for the feature's happy paths only, one per main scenario.
 
-While working, run only the feature's own spec files (`npx playwright test tests/x/y.spec.ts`). Run the whole suite with `npm run verify` once, before the commit.
+While working, run only the feature's own spec files (`npx playwright test tests/x/y.spec.ts`). Run the whole suite with `npm run test:e2e` once, before the commit.
 
 ## 6. Review
 

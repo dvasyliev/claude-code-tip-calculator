@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# Way out for a human: SKIP_VERIFY=1 git push skips the check
+[ -n "$SKIP_VERIFY" ] && { echo "pre-push: skipped via SKIP_VERIFY" >&2; exit 0; }
+
+# Run all checks. If they fail, the push is cancelled.
+echo "pre-push: running npm run verify"
+npm run -s verify
