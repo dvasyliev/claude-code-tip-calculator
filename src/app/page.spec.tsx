@@ -390,3 +390,53 @@ describe("App – invalid value handling", () => {
     expect(bill).toHaveValue("50");
   });
 });
+
+describe("App – history", () => {
+  beforeEach(() => localStorage.clear());
+
+  async function enterBill(user: ReturnType<typeof userEvent.setup>) {
+    await user.clear(getBillInput());
+    await user.type(getBillInput(), "50");
+    await user.clear(getTipInput());
+    await user.type(getTipInput(), "15");
+  }
+
+  it("Save adds the current calculation", async () => {
+    const { user } = setup();
+    await enterBill(user);
+    await user.click(screen.getByText("Are you splitting the bill?"));
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    const item = screen.getByRole("listitem");
+    expect(item).toHaveTextContent("50.00");
+    expect(item).toHaveTextContent("15%");
+    expect(item).toHaveTextContent("2 people");
+    expect(item).toHaveTextContent("28.75");
+  });
+
+  it("Save without split stores 1 person and the full total", async () => {
+    const { user } = setup();
+    await enterBill(user);
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    const item = screen.getByRole("listitem");
+    expect(item).toHaveTextContent("1 person");
+    expect(item).toHaveTextContent("57.50");
+  });
+
+  it("Clear removes all entries", async () => {
+    const { user } = setup();
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    await user.click(screen.getByRole("button", { name: "Clear" }));
+    expect(
+      screen.queryByRole("heading", { name: "History" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("history is still there after remount", async () => {
+    const user = userEvent.setup();
+    const { unmount } = render(<App />);
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    unmount();
+    render(<App />);
+    expect(screen.getAllByRole("listitem")).toHaveLength(1);
+  });
+});

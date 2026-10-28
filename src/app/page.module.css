@@ -67,3 +67,30 @@
   background: #e5e7eb;
   color: #374151;
 }
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actions > * {
+  flex: 1;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 14px;
+  background: #3b82f6;
+  border: 1.5px solid #3b82f6;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.save-btn:hover {
+  background: #2563eb;
+}

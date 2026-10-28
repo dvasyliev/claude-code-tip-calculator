@@ -17,6 +17,8 @@ import { useTipCalculator } from "@/hooks/useTipCalculator";
 import { FieldInput } from "@/components/field-input/field-input";
 import { ComputedField } from "@/components/computed-field/computed-field";
 import { SplitSection } from "@/components/split-section/split-section";
+import { HistoryList } from "./history/history-list";
+import { useHistory } from "./history/use-history";
 
 function App() {
   const { control, setValue, reset } = useForm<TipForm>({
@@ -34,6 +36,17 @@ function App() {
     tip,
     people,
   );
+
+  const { entries, add, clear } = useHistory();
+
+  const handleSave = () => {
+    add({
+      bill: parseFloat(bill) || 0,
+      tip: parseFloat(tip) || 0,
+      people: splitOpen ? Math.max(1, parseInt(people) || 1) : 1,
+      totalPerPerson: splitOpen ? totalPerPerson : total,
+    });
+  };
 
   const handleReset = () => {
     reset(DEFAULTS);
@@ -137,10 +150,16 @@ function App() {
           </div>
         </SplitSection>
 
-        <button className={styles["reset-btn"]} onClick={handleReset}>
-          Reset
-        </button>
+        <div className={styles.actions}>
+          <button className={styles["save-btn"]} onClick={handleSave}>
+            Save
+          </button>
+          <button className={styles["reset-btn"]} onClick={handleReset}>
+            Reset
+          </button>
+        </div>
       </div>
+      <HistoryList entries={entries} onClear={clear} />
     </div>
   );
 }
