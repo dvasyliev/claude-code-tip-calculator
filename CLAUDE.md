@@ -35,3 +35,7 @@ The page lives in `src/app/page.tsx` (client component) with `src/app/layout.tsx
 ## Documentation
 
 - **`docs/`** holds the spec for each feature (`01`–`14`) and `00-architecture.md` with the shared plan (implementation order and older plans written before the switch to TMDB lists). Read the matching doc before building a feature; it is the spec step 1 of `feature-workflow.md` starts from.
+
+## Commits
+
+Before every commit, use the `committing-with-commitlint` skill.

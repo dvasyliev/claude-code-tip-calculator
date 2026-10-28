@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Check the commit message with commitlint. Git passes the path to the message as $1.
+# --no-install means: use the commitlint we installed, never download it.
+npx --no-install commitlint --edit "$1"
