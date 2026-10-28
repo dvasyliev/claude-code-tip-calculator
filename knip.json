@@ -1,4 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignoreDependencies": ["@playwright/cli"]
+  "ignoreDependencies": ["@playwright/cli"],
+  "husky": {
+    "config": [".githooks/commit-msg", ".githooks/pre-push"]
+  }
 }
