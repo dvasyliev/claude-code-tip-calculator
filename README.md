@@ -4,13 +4,14 @@ About me ◽️ 🎬 Udemy Instructor ◽️ 👨🏻‍💻 Front-End Engineer 
 
 This repository contains the Source Code for the Tip Calculator App from 🧑🏻‍💻 [Claude Code: AI Crash Course for Developers](https://linkly.link/2gkkw) and 🎛️ [Harness Engineering: Modern AI Software Development Bootcamp](https://go.dvasyliev.com/harness-engineering) courses.
 
+<!-- COURSES:START -->
 # All My Courses
 
 #### Agentic AI Courses
 
 🎛️ [Harness Engineering: Modern AI Software Development Bootcamp](https://go.dvasyliev.com/harness-engineering)\
 🦞 [OpenClaw for Developers: AI Coding Crash Course](https://go.dvasyliev.com/openclaw)\
-🧑🏻‍💻 [AI Code Review: Evaluate Python Code with Confidence](https://go.dvasyliev.com/evaluating-ai-code)\
+🧑🏻‍💻 [AI Code Review: Evaluate Python Code with Confidence](https://go.dvasyliev.com/evaluating-ai-code)
 
 #### AI Tools Courses
 
@@ -46,6 +47,7 @@ This repository contains the Source Code for the Tip Calculator App from 🧑�
 
 👣 [AI Agents with OpenAI AgentKit: Hands-On Guide](https://go.dvasyliev.com/agentkit)\
 💬 [ChatGPT for Developers: AI Coding Crash Course](https://go.dvasyliev.com/chatgpt)
+<!-- COURSES:END -->
 
 ## Open project in the VS code (code editor)
 
